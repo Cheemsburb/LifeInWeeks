@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import InputForm from "./components/InputForm";
+import HeroSection from "./components/HeroSection";
 import StatsPanel from "./components/StatsPanel";
 import TimeBreakdown from "./components/TimeBreakdown";
 import WeeksGrid from "./components/WeeksGrid";
@@ -220,9 +221,27 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1>Life in Weeks</h1>
-        <p className="header-subtitle">
-          Visualize your lifetime and make every week count
-        </p>
+        {userProfile && (
+          <div className="header-controls">
+            <div className="header-links">
+              <button
+                className="header-link"
+                onClick={() => setShowLifestyle(!showLifestyle)}
+              >
+                Lifestyle Factors
+              </button>
+              <button
+                className="header-link"
+                onClick={() => setShowExport(!showExport)}
+              >
+                Export Data
+              </button>
+              <button className="header-link reset-btn" onClick={handleReset}>
+                Change Profile
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       <main className="app-main">
@@ -234,23 +253,14 @@ function App() {
           />
         ) : (
           <>
-            <div className="action-buttons">
-              <button
-                className="action-btn"
-                onClick={() => setShowLifestyle(!showLifestyle)}
-              >
-                Lifestyle Factors
-              </button>
-              <button
-                className="action-btn"
-                onClick={() => setShowExport(!showExport)}
-              >
-                Export/Import Data
-              </button>
-              <button className="reset-btn" onClick={handleReset}>
-                Change Profile
-              </button>
-            </div>
+            {calculatedData && (
+              <HeroSection
+                weeksRemaining={calculatedData.weeksRemaining}
+                age={calculatedData.age}
+                yearsRemaining={calculatedData.yearsRemaining}
+                userProfile={userProfile}
+              />
+            )}
 
             {showLifestyle && (
               <LifestyleFactors

@@ -6,9 +6,10 @@
 
 .weeks-grid-container h2 {
   text-align: center;
-  color: #333;
+  color: var(--text-dark);
   margin-bottom: 1rem;
-  font-size: 2rem;
+  font-size: 1.75rem;
+  font-weight: 700;
 }
 
 .grid-legend {
@@ -24,175 +25,283 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 0.875rem;
+  color: var(--text-medium);
 }
 
 .legend-item .week-box {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
 }
 
 .legend-item .week-box.lived {
-  background-color: #667eea;
+  background-color: var(--primary-blue);
 }
 
 .legend-item .week-box.remaining {
-  background-color: #e8eef7;
-  border: 2px solid #ccc;
+  background-color: var(--border-light);
+  border: 1px solid #999;
 }
 
 .legend-item .week-box.milestone {
-  background-color: #f5576c;
-  box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.2);
+  background-color: var(--primary-pink);
 }
 
 .legend-item .week-box.annotated {
-  background: linear-gradient(135deg, #667eea 0%, #f5576c 100%);
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    135deg,
+    var(--primary-blue) 0%,
+    var(--primary-pink) 100%
+  );
 }
 
 .legend-item .week-box.goal-block {
-  background-color: #4caf50;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  background-color: #10b981;
 }
 
-.weeks-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18px, 1fr));
-  gap: 6px;
+.legend-item .week-box.current-week {
+  border: 2px solid var(--primary-pink);
+  background-color: transparent;
+}
+
+/* ========== GRID WRAPPER ========== */
+.weeks-grid-wrapper {
+  background: var(--bg-white);
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
   padding: 1.5rem;
-  background: #f8f9fb;
-  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ========== YEAR ROW LAYOUT ========== */
+.year-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-bottom: 0;
+  align-items: flex-start;
+}
+
+.year-row.decade-start {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--border-light);
+}
+
+.year-row.decade-end {
   margin-bottom: 1.5rem;
-  max-height: 600px;
-  overflow-y: auto;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
 }
 
+.year-label {
+  min-width: 60px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-top: 0.25rem;
+  white-space: nowrap;
+}
+
+.weeks-row {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+/* ========== WEEK BOX ========== */
 .week-box {
-  aspect-ratio: 1;
-  border-radius: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
   cursor: pointer;
-  transition: all 0.2s;
-  border: 2px solid transparent;
+  transition: all 0.15s cubic-bezier(0.2, 0.3, 0.25, 0.9);
+  border: 1px solid transparent;
+  position: relative;
 }
 
+.week-box:hover {
+  z-index: 10;
+}
+
+/* Lived weeks */
 .week-box.lived {
-  background-color: #667eea;
-  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+  background-color: var(--primary-blue);
+  box-shadow: none;
 }
 
 .week-box.lived:hover {
-  transform: scale(1.15);
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.5);
+  transform: scale(1.3);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
 }
 
+/* Remaining weeks */
 .week-box.remaining {
   background-color: transparent;
-  border: 2px solid #ccc;
+  border: 1px solid var(--border-light);
 }
 
 .week-box.remaining:hover {
-  border-color: #999;
-  background-color: #f0f0f0;
+  border-color: var(--text-light);
+  background-color: rgba(200, 200, 200, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+/* Milestone weeks */
 .week-box.milestone {
-  background-color: #f5576c;
-  box-shadow:
-    0 0 0 2px rgba(245, 87, 108, 0.3),
-    0 2px 8px rgba(245, 87, 108, 0.4);
+  background-color: var(--primary-pink);
+  box-shadow: 0 0 0 1px rgba(236, 72, 153, 0.3);
 }
 
 .week-box.milestone:hover {
-  transform: scale(1.2);
-  box-shadow:
-    0 0 0 3px rgba(245, 87, 108, 0.4),
-    0 4px 12px rgba(245, 87, 108, 0.6);
+  transform: scale(1.3);
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.5);
 }
 
 .week-box.milestone.lived {
-  background: linear-gradient(135deg, #667eea 0%, #f5576c 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary-blue) 0%,
+    var(--primary-pink) 100%
+  );
 }
 
-/* Annotated weeks styling */
+/* Annotated weeks */
 .week-box.annotated {
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.5),
-    0 2px 6px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .week-box.annotated:hover {
-  transform: scale(1.25);
-  box-shadow:
-    0 0 0 2px rgba(255, 255, 255, 0.6),
-    0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Goal block styling */
+/* Goal block weeks */
 .week-box.goal-block {
-  border: 2px solid rgba(76, 175, 80, 0.5);
-  box-shadow:
-    0 0 0 1px rgba(76, 175, 80, 0.3),
-    0 2px 6px rgba(76, 175, 80, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  box-shadow: 0 1px 4px rgba(16, 185, 129, 0.2);
   animation: goalPulse 2s infinite;
 }
 
 .week-box.goal-block:hover {
-  transform: scale(1.25);
-  box-shadow:
-    0 0 0 2px rgba(76, 175, 80, 0.5),
-    0 4px 12px rgba(76, 175, 80, 0.5);
+  transform: scale(1.3);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
 @keyframes goalPulse {
   0%,
   100% {
-    box-shadow:
-      0 0 0 1px rgba(76, 175, 80, 0.3),
-      0 2px 6px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 1px 4px rgba(16, 185, 129, 0.2);
   }
   50% {
-    box-shadow:
-      0 0 0 3px rgba(76, 175, 80, 0.2),
-      0 2px 8px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
   }
 }
 
-/* Drag selection styling */
+/* Current week highlight */
+.week-box.current-week {
+  border: 2px solid var(--primary-pink);
+  animation: currentPulse 2s infinite;
+}
+
+.week-box.current-week:hover {
+  transform: scale(1.3);
+}
+
+@keyframes currentPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0px rgba(236, 72, 153, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.3);
+  }
+}
+
+/* Drag selection */
 .week-box.drag-selection {
-  border: 2px solid #ff9800;
-  background-color: rgba(255, 152, 0, 0.3);
-  animation: dragPulse 0.5s infinite alternate;
+  border: 2px solid var(--accent-blue);
+  background-color: rgba(59, 130, 246, 0.2);
 }
 
-@keyframes dragPulse {
-  from {
-    opacity: 0.6;
-  }
-  to {
-    opacity: 1;
-  }
+/* Week tooltip */
+.week-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-dark);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 20;
+  margin-bottom: 0.5rem;
+  pointer-events: none;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.week-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid var(--text-dark);
 }
 
 .grid-info {
   text-align: center;
-  color: #999;
-  font-size: 0.9rem;
-  margin-top: 1rem;
+  color: var(--text-light);
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+  font-weight: 500;
 }
 
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
-  .weeks-grid {
-    grid-template-columns: repeat(auto-fit, minmax(16px, 1fr));
-    gap: 5px;
-    max-height: 500px;
+  .weeks-grid-wrapper {
+    padding: 1rem;
+  }
+
+  .week-box {
+    width: 16px;
+    height: 16px;
+  }
+
+  .weeks-row {
+    gap: 2px;
+  }
+
+  .year-label {
+    min-width: 50px;
+    font-size: 0.7rem;
+  }
+
+  .year-row {
+    gap: 0.75rem;
+  }
+
+  .legend-item .week-box {
+    width: 16px;
+    height: 16px;
   }
 
   .grid-legend {
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .weeks-grid-container h2 {
@@ -201,13 +310,61 @@
 }
 
 @media (max-width: 480px) {
-  .weeks-grid {
-    grid-template-columns: repeat(auto-fit, minmax(14px, 1fr));
-    gap: 4px;
+  .weeks-grid-wrapper {
+    padding: 0.75rem;
+    overflow-x: auto;
+  }
+
+  .week-box {
+    width: 14px;
+    height: 14px;
+  }
+
+  .weeks-row {
+    gap: 2px;
+  }
+
+  .year-label {
+    min-width: 45px;
+    font-size: 0.65rem;
+  }
+
+  .year-row {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .year-row.decade-start {
+    margin-top: 0.75rem;
+    padding-top: 1rem;
+  }
+
+  .year-row.decade-end {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .legend-item {
+    font-size: 0.8rem;
+  }
+
+  .legend-item .week-box {
+    width: 14px;
+    height: 14px;
   }
 
   .grid-legend {
+    gap: 1rem;
     flex-direction: column;
-    gap: 0.75rem;
+  }
+
+  .weeks-grid-container h2 {
+    font-size: 1.25rem;
+  }
+
+  /* On mobile, show a scrolling view for decades */
+  .weeks-grid-wrapper {
+    max-height: 600px;
+    overflow-y: auto;
   }
 }
