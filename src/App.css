@@ -51,9 +51,39 @@
   color: #667eea;
 }
 
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto 1rem;
+  padding: 0 1rem;
+}
+
+.action-btn {
+  padding: 0.6rem 1.25rem;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
 .reset-btn {
-  display: block;
-  margin: 1rem auto;
   padding: 0.6rem 1.5rem;
   background-color: #f5576c;
   color: white;
@@ -73,6 +103,15 @@
 
 .reset-btn:active {
   transform: translateY(0);
+}
+
+.lifestyle-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white !important;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem !important;
+  font-weight: 600;
 }
 
 .app-footer {

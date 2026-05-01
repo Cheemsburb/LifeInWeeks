@@ -111,6 +111,32 @@ export const calculateMilestoneWeeks = (totalWeeks, lifeExpectancyYears) => {
 };
 
 /**
+ * Calculate activity breakdown - converting weeks into tangible activities
+ * @param {number} weeksRemaining - Weeks remaining
+ * @returns {object} - Various activity equivalents
+ */
+export const calculateActivityBreakdown = (weeksRemaining) => {
+  // Average estimates for various activities
+  const booksPerYear = 12; // Average reader
+  const moviesPerYear = 52; // One per week
+  const vacationsPerYear = 2; // Two week-long vacations
+  const daysPerWeek = 7;
+  const hoursPerDay = 24;
+
+  const yearsRemaining = weeksRemaining / 52;
+
+  return {
+    books: Math.floor(yearsRemaining * booksPerYear),
+    movies: Math.floor(yearsRemaining * moviesPerYear),
+    vacations: Math.floor(yearsRemaining * vacationsPerYear),
+    days: Math.floor(weeksRemaining * daysPerWeek),
+    hours: Math.floor(weeksRemaining * daysPerWeek * hoursPerDay),
+    weekends: Math.floor(weeksRemaining), // Each week has one weekend
+    sleepWeeks: Math.floor(weeksRemaining * 0.33), // Assuming 8 hours sleep = 1/3 of time
+  };
+};
+
+/**
  * Validate birthdate input
  * @param {string} birthdate - ISO date string
  * @returns {object} - { isValid: boolean, error?: string }

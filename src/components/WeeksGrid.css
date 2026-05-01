@@ -48,6 +48,16 @@
   box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.2);
 }
 
+.legend-item .week-box.annotated {
+  background: linear-gradient(135deg, #667eea 0%, #f5576c 100%);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.legend-item .week-box.goal-block {
+  background-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
 .weeks-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18px, 1fr));
@@ -104,6 +114,67 @@
 
 .week-box.milestone.lived {
   background: linear-gradient(135deg, #667eea 0%, #f5576c 100%);
+}
+
+/* Annotated weeks styling */
+.week-box.annotated {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.week-box.annotated:hover {
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Goal block styling */
+.week-box.goal-block {
+  border: 2px solid rgba(76, 175, 80, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(76, 175, 80, 0.3),
+    0 2px 6px rgba(76, 175, 80, 0.3);
+  animation: goalPulse 2s infinite;
+}
+
+.week-box.goal-block:hover {
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 2px rgba(76, 175, 80, 0.5),
+    0 4px 12px rgba(76, 175, 80, 0.5);
+}
+
+@keyframes goalPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(76, 175, 80, 0.3),
+      0 2px 6px rgba(76, 175, 80, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px rgba(76, 175, 80, 0.2),
+      0 2px 8px rgba(76, 175, 80, 0.4);
+  }
+}
+
+/* Drag selection styling */
+.week-box.drag-selection {
+  border: 2px solid #ff9800;
+  background-color: rgba(255, 152, 0, 0.3);
+  animation: dragPulse 0.5s infinite alternate;
+}
+
+@keyframes dragPulse {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .grid-info {
