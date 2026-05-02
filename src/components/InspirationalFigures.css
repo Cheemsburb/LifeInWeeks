@@ -1,0 +1,241 @@
+.inspirational-figures {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.inspirational-figures h2 {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.figures-description {
+  color: var(--text-medium);
+  margin-bottom: 2rem;
+}
+
+.figures-controls {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.prompt-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-pink));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.prompt-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.toggle-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text-medium);
+}
+
+.toggle-option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.reflection-prompt {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-left: 4px solid #f59e0b;
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.reflection-prompt h4 {
+  margin: 0 0 0.5rem 0;
+  color: #92400e;
+  font-size: 1rem;
+}
+
+.reflection-prompt p {
+  margin: 0;
+  color: #78350f;
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+.timeline-chart-container {
+  background: var(--bg-white);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-subtle);
+  margin-bottom: 2rem;
+}
+
+.timeline-chart-container h3 {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.chart-wrapper {
+  width: 100%;
+  height: 400px;
+}
+
+.custom-tooltip {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  box-shadow: var(--shadow-md);
+}
+
+.tooltip-name {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0 0 0.25rem 0;
+}
+
+.tooltip-age {
+  color: var(--text-medium);
+  font-size: 0.9rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.tooltip-event {
+  color: var(--primary-blue);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.figures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.figure-card {
+  background: var(--bg-white);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-subtle);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.figure-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.figure-card.selected {
+  border-color: var(--primary-blue);
+}
+
+.figure-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.figure-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.figure-lifespan {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  background: var(--bg-light);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.figure-description {
+  color: var(--text-medium);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.figure-timeline {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.figure-timeline h4 {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.timeline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.timeline-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0;
+  border-left: 3px solid;
+  padding-left: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-age {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 0.85rem;
+  min-width: 45px;
+}
+
+.timeline-label {
+  font-size: 0.88rem;
+  color: var(--text-medium);
+  flex: 1;
+}
+
+.timeline-category {
+  font-size: 0.7rem;
+  color: white;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  text-transform: capitalize;
+}
+
+@media (max-width: 768px) {
+  .figures-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-wrapper {
+    height: 300px;
+  }
+
+  .figures-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

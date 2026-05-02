@@ -1,0 +1,290 @@
+{
+  "personas": [
+    {
+      "id": "avg-filipino",
+      "name": "Average Filipino",
+      "lifeExpectancy": 71,
+      "description": "Based on Philippines national statistics",
+      "milestones": [
+        { "week": 0, "label": "Birth", "category": "life" },
+        {
+          "week": 260,
+          "label": "Start Elementary School (Age 5)",
+          "category": "education"
+        },
+        {
+          "week": 520,
+          "label": "Start High School (Age 10)",
+          "category": "education"
+        },
+        {
+          "week": 728,
+          "label": "Start College/Work (Age 14)",
+          "category": "education"
+        },
+        { "week": 936, "label": "Start Career (Age 18)", "category": "career" },
+        {
+          "week": 1144,
+          "label": "Marriage Age (Age 22)",
+          "category": "family"
+        },
+        { "week": 1196, "label": "First Child (Age 23)", "category": "family" },
+        { "week": 1456, "label": "Mid-Career (Age 28)", "category": "career" },
+        {
+          "week": 1976,
+          "label": "Children Grown (Age 38)",
+          "category": "family"
+        },
+        { "week": 2600, "label": "Retirement (Age 50)", "category": "career" },
+        {
+          "week": 3120,
+          "label": "Grandchildren (Age 60)",
+          "category": "family"
+        },
+        { "week": 3692, "label": "Life End (Age 71)", "category": "life" }
+      ],
+      "eras": [
+        {
+          "startWeek": 0,
+          "endWeek": 260,
+          "label": "Early Childhood",
+          "color": "#FEE2E2"
+        },
+        {
+          "startWeek": 260,
+          "endWeek": 728,
+          "label": "Education Years",
+          "color": "#DBEAFE"
+        },
+        {
+          "startWeek": 728,
+          "endWeek": 2600,
+          "label": "Career & Family",
+          "color": "#D1FAE5"
+        },
+        {
+          "startWeek": 2600,
+          "endWeek": 3692,
+          "label": "Retirement",
+          "color": "#FEF3C7"
+        }
+      ]
+    },
+    {
+      "id": "avg-american",
+      "name": "Average American",
+      "lifeExpectancy": 77,
+      "description": "Based on USA national statistics",
+      "milestones": [
+        { "week": 0, "label": "Birth", "category": "life" },
+        {
+          "week": 260,
+          "label": "Start School (Age 5)",
+          "category": "education"
+        },
+        {
+          "week": 676,
+          "label": "Start High School (Age 13)",
+          "category": "education"
+        },
+        {
+          "week": 832,
+          "label": "Start College (Age 16)",
+          "category": "education"
+        },
+        { "week": 988, "label": "Start Career (Age 19)", "category": "career" },
+        {
+          "week": 1300,
+          "label": "Marriage Age (Age 25)",
+          "category": "family"
+        },
+        { "week": 1404, "label": "First Child (Age 27)", "category": "family" },
+        { "week": 1820, "label": "Mid-Career (Age 35)", "category": "career" },
+        {
+          "week": 2288,
+          "label": "Children Independent (Age 44)",
+          "category": "family"
+        },
+        { "week": 3120, "label": "Retirement (Age 60)", "category": "career" },
+        {
+          "week": 3640,
+          "label": "Grandchildren (Age 70)",
+          "category": "family"
+        },
+        { "week": 4004, "label": "Life End (Age 77)", "category": "life" }
+      ],
+      "eras": [
+        {
+          "startWeek": 0,
+          "endWeek": 260,
+          "label": "Early Childhood",
+          "color": "#FEE2E2"
+        },
+        {
+          "startWeek": 260,
+          "endWeek": 832,
+          "label": "Education Years",
+          "color": "#DBEAFE"
+        },
+        {
+          "startWeek": 832,
+          "endWeek": 3120,
+          "label": "Career & Family",
+          "color": "#D1FAE5"
+        },
+        {
+          "startWeek": 3120,
+          "endWeek": 4004,
+          "label": "Retirement",
+          "color": "#FEF3C7"
+        }
+      ]
+    },
+    {
+      "id": "avg-japanese",
+      "name": "Average Japanese",
+      "lifeExpectancy": 84,
+      "description": "Based on Japan national statistics",
+      "milestones": [
+        { "week": 0, "label": "Birth", "category": "life" },
+        {
+          "week": 312,
+          "label": "Start School (Age 6)",
+          "category": "education"
+        },
+        {
+          "week": 676,
+          "label": "Start High School (Age 13)",
+          "category": "education"
+        },
+        {
+          "week": 884,
+          "label": "Start University (Age 17)",
+          "category": "education"
+        },
+        {
+          "week": 1092,
+          "label": "Start Career (Age 21)",
+          "category": "career"
+        },
+        {
+          "week": 1456,
+          "label": "Marriage Age (Age 28)",
+          "category": "family"
+        },
+        { "week": 1560, "label": "First Child (Age 30)", "category": "family" },
+        { "week": 1976, "label": "Peak Career (Age 38)", "category": "career" },
+        {
+          "week": 2496,
+          "label": "Children Independent (Age 48)",
+          "category": "family"
+        },
+        { "week": 3380, "label": "Retirement (Age 65)", "category": "career" },
+        {
+          "week": 3900,
+          "label": "Grandchildren (Age 75)",
+          "category": "family"
+        },
+        { "week": 4368, "label": "Life End (Age 84)", "category": "life" }
+      ],
+      "eras": [
+        {
+          "startWeek": 0,
+          "endWeek": 312,
+          "label": "Early Childhood",
+          "color": "#FEE2E2"
+        },
+        {
+          "startWeek": 312,
+          "endWeek": 884,
+          "label": "Education Years",
+          "color": "#DBEAFE"
+        },
+        {
+          "startWeek": 884,
+          "endWeek": 3380,
+          "label": "Career & Family",
+          "color": "#D1FAE5"
+        },
+        {
+          "startWeek": 3380,
+          "endWeek": 4368,
+          "label": "Retirement",
+          "color": "#FEF3C7"
+        }
+      ]
+    },
+    {
+      "id": "avg-office-worker",
+      "name": "Average Office Worker",
+      "lifeExpectancy": 75,
+      "description": "Typical urban professional trajectory",
+      "milestones": [
+        { "week": 0, "label": "Birth", "category": "life" },
+        {
+          "week": 260,
+          "label": "Start School (Age 5)",
+          "category": "education"
+        },
+        {
+          "week": 832,
+          "label": "Start University (Age 16)",
+          "category": "education"
+        },
+        {
+          "week": 936,
+          "label": "Graduation & First Job (Age 18)",
+          "category": "career"
+        },
+        {
+          "week": 1300,
+          "label": "Career Establishment (Age 25)",
+          "category": "career"
+        },
+        {
+          "week": 1560,
+          "label": "Management Role (Age 30)",
+          "category": "career"
+        },
+        {
+          "week": 2080,
+          "label": "Senior Position (Age 40)",
+          "category": "career"
+        },
+        {
+          "week": 2860,
+          "label": "Executive Level (Age 55)",
+          "category": "career"
+        },
+        { "week": 3380, "label": "Retirement (Age 65)", "category": "career" },
+        { "week": 3900, "label": "Life End (Age 75)", "category": "life" }
+      ],
+      "eras": [
+        {
+          "startWeek": 0,
+          "endWeek": 260,
+          "label": "Early Childhood",
+          "color": "#FEE2E2"
+        },
+        {
+          "startWeek": 260,
+          "endWeek": 936,
+          "label": "Education Years",
+          "color": "#DBEAFE"
+        },
+        {
+          "startWeek": 936,
+          "endWeek": 3380,
+          "label": "Career Years",
+          "color": "#D1FAE5"
+        },
+        {
+          "startWeek": 3380,
+          "endWeek": 3900,
+          "label": "Retirement",
+          "color": "#FEF3C7"
+        }
+      ]
+    }
+  ]
+}

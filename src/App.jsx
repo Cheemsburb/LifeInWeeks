@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import InputForm from "./components/InputForm";
 import HeroSection from "./components/HeroSection";
@@ -9,6 +9,16 @@ import AnnotationModal from "./components/AnnotationModal";
 import GoalModal from "./components/GoalModal";
 import LifestyleFactors from "./components/LifestyleFactors";
 import DataExport from "./components/DataExport";
+import DarkModeToggle from "./components/DarkModeToggle";
+import PINLock from "./components/PINLock";
+import ImageExport from "./components/ImageExport";
+import AnalyticsChart from "./components/AnalyticsChart";
+import ViewToggle from "./components/ViewToggle";
+import ReminderNotification from "./components/ReminderNotification";
+import StreakCounter from "./components/StreakCounter";
+import PrintView from "./components/PrintView";
+import PersonaComparison from "./components/PersonaComparison";
+import InspirationalFigures from "./components/InspirationalFigures";
 import {
   calculateWeeksLived,
   calculateTotalWeeks,
@@ -29,6 +39,15 @@ import {
   saveGoalBlocks,
   loadLifestyleFactors,
   saveLifestyleFactors,
+  loadJournals,
+  saveJournals,
+  loadCustomTags,
+  saveCustomTags,
+  loadWeekEmojis,
+  saveWeekEmojis,
+  loadAnnotationTags,
+  saveAnnotationTags,
+  loadPin,
 } from "./utils/storage";
 
 function App() {
@@ -37,12 +56,23 @@ function App() {
   const [annotations, setAnnotations] = useState([]);
   const [goalBlocks, setGoalBlocks] = useState([]);
   const [lifestyleFactors, setLifestyleFactors] = useState(null);
+  const [journals, setJournals] = useState([]);
+  const [customTags, setCustomTags] = useState([]);
+  const [weekEmojis, setWeekEmojis] = useState([]);
+  const [annotationTags, setAnnotationTags] = useState([]);
   const [isAnnotationModalOpen, setIsAnnotationModalOpen] = useState(false);
   const [selectedWeek, setSelectedWeek] = useState(null);
   const [isGoalModalOpen, setIsGoalModalOpen] = useState(false);
   const [selectedGoalRange, setSelectedGoalRange] = useState(null);
   const [showLifestyle, setShowLifestyle] = useState(false);
   const [showExport, setShowExport] = useState(false);
+  const [showPersonaComparison, setShowPersonaComparison] = useState(false);
+  const [showInspirational, setShowInspirational] = useState(false);
+  const [showAnalytics, setShowAnalytics] = useState(false);
+  const [currentView, setCurrentView] = useState("life");
+  const [isPinSet, setIsPinSet] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const gridRef = useRef(null);
 
   // Load saved data on component mount
   useEffect(() => {
@@ -58,6 +88,18 @@ function App() {
     const savedLifestyle = loadLifestyleFactors();
     if (savedLifestyle) {
       setLifestyleFactors(savedLifestyle);
+    }
+    const savedJournals = loadJournals();
+    setJournals(savedJournals);
+    const savedTags = loadCustomTags();
+    setCustomTags(savedTags);
+    const savedEmojis = loadWeekEmojis();
+    setWeekEmojis(savedEmojis);
+    const savedAnnotationTags = loadAnnotationTags();
+    setAnnotationTags(savedAnnotationTags);
+    const savedPin = loadPin();
+    if (savedPin) {
+      setIsPinSet(true);
     }
   }, []);
 
@@ -80,6 +122,27 @@ function App() {
       saveGoalBlocks(goalBlocks);
     }
   }, [goalBlocks]);
+
+  // Save journals whenever they change
+  useEffect(() => {
+    if (journals.length > 0) {
+      saveJournals(journals);
+    }
+  }, [journals]);
+
+  // Save emojis whenever they change
+  useEffect(() => {
+    if (weekEmojis.length > 0) {
+      saveWeekEmojis(weekEmojis);
+    }
+  }, [weekEmojis]);
+
+  // Save annotation tags whenever they change
+  useEffect(() => {
+    if (annotationTags.length > 0) {
+      saveAnnotationTags(annotationTags);
+    }
+  }, [annotationTags]);
 
   const calculateAndSetData = (profile) => {
     const weeksLived = calculateWeeksLived(profile.birthdate);
@@ -149,6 +212,29 @@ function App() {
     setSelectedWeek(null);
   };
 
+  const handleJournalSave = (journal) => {
+    setJournals((prev) => {
+      const filtered = prev.filter((j) => j.weekNumber !== journal.weekNumber);
+      return [...filtered, journal];
+    });
+  };
+
+  const handleEmojiSave = (emojiData) => {
+    setWeekEmojis((prev) => {
+      const filtered = prev.filter(
+        (e) => e.weekNumber !== emojiData.weekNumber,
+      );
+      return [...filtered, emojiData];
+    });
+  };
+
+  const handleTagsSave = (tagData) => {
+    setAnnotationTags((prev) => {
+      const filtered = prev.filter((t) => t.weekNumber !== tagData.weekNumber);
+      return [...filtered, tagData];
+    });
+  };
+
   const handleGoalSelect = (startWeek, endWeek) => {
     setSelectedGoalRange({ startWeek, endWeek });
     setIsGoalModalOpen(true);
@@ -197,15 +283,36 @@ function App() {
     setAnnotations([]);
     setGoalBlocks([]);
     setLifestyleFactors(null);
+    setJournals([]);
+    setWeekEmojis([]);
+    setAnnotationTags([]);
     localStorage.removeItem("lifeInWeeks_profile");
     localStorage.removeItem("lifeInWeeks_annotations");
     localStorage.removeItem("lifeInWeeks_goalBlocks");
     localStorage.removeItem("lifeInWeeks_lifestyle");
+    localStorage.removeItem("lifeInWeeks_journals");
+    localStorage.removeItem("lifeInWeeks_emojis");
+    localStorage.removeItem("lifeInWeeks_annotationTags");
   };
 
   const getSelectedAnnotation = () => {
     if (selectedWeek === null) return null;
     return annotations.find((a) => a.weekNumber === selectedWeek);
+  };
+
+  const getSelectedJournal = () => {
+    if (selectedWeek === null) return null;
+    return journals.find((j) => j.weekNumber === selectedWeek);
+  };
+
+  const getSelectedEmoji = () => {
+    if (selectedWeek === null) return null;
+    return weekEmojis.find((e) => e.weekNumber === selectedWeek);
+  };
+
+  const getSelectedTags = () => {
+    if (selectedWeek === null) return null;
+    return annotationTags.find((t) => t.weekNumber === selectedWeek);
   };
 
   const getSelectedGoal = () => {
@@ -217,31 +324,68 @@ function App() {
     );
   };
 
+  const handlePinUnlock = () => {
+    setIsUnlocked(true);
+  };
+
+  const handleViewChange = (view) => {
+    setCurrentView(view);
+  };
+
+  // Show PIN lock if set and not unlocked
+  if (isPinSet && !isUnlocked) {
+    return (
+      <div className="app">
+        <PINLock onUnlock={handlePinUnlock} />
+      </div>
+    );
+  }
+
   return (
     <div className="app">
       <header className="app-header">
         <h1>Life in Weeks</h1>
-        {userProfile && (
-          <div className="header-controls">
+        <div className="header-controls">
+          <DarkModeToggle />
+          {userProfile && (
             <div className="header-links">
               <button
                 className="header-link"
                 onClick={() => setShowLifestyle(!showLifestyle)}
               >
-                Lifestyle Factors
+                Lifestyle
+              </button>
+              <button
+                className="header-link"
+                onClick={() => setShowPersonaComparison(!showPersonaComparison)}
+              >
+                Compare
+              </button>
+              <button
+                className="header-link"
+                onClick={() => setShowInspirational(!showInspirational)}
+              >
+                Inspire
+              </button>
+              <button
+                className="header-link"
+                onClick={() => setShowAnalytics(!showAnalytics)}
+              >
+                Analytics
               </button>
               <button
                 className="header-link"
                 onClick={() => setShowExport(!showExport)}
               >
-                Export Data
+                Export
               </button>
+              <PINLock onUnlock={handlePinUnlock} />
               <button className="header-link reset-btn" onClick={handleReset}>
-                Change Profile
+                Reset
               </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </header>
 
       <main className="app-main">
@@ -262,6 +406,18 @@ function App() {
               />
             )}
 
+            {/* Streak Counter */}
+            {calculatedData && (
+              <StreakCounter
+                currentWeek={calculatedData.weeksLived}
+                annotations={annotations}
+                goalBlocks={goalBlocks}
+              />
+            )}
+
+            {/* View Toggle */}
+            <ViewToggle onViewChange={handleViewChange} />
+
             {showLifestyle && (
               <LifestyleFactors
                 currentFactors={lifestyleFactors}
@@ -272,7 +428,30 @@ function App() {
               />
             )}
 
-            {showExport && <DataExport />}
+            {showExport && (
+              <div className="export-section">
+                <DataExport />
+                <ImageExport gridRef={gridRef} />
+              </div>
+            )}
+
+            {showPersonaComparison && calculatedData && (
+              <PersonaComparison
+                userWeeksLived={calculatedData.weeksLived}
+                userLifeExpectancy={userProfile.lifeExpectancy}
+              />
+            )}
+
+            {showInspirational && <InspirationalFigures />}
+
+            {showAnalytics && (
+              <AnalyticsChart
+                annotations={annotations}
+                goalBlocks={goalBlocks}
+                customTags={customTags}
+                annotationTags={annotationTags}
+              />
+            )}
 
             {calculatedData && (
               <>
@@ -305,13 +484,24 @@ function App() {
                 />
 
                 <WeeksGrid
+                  ref={gridRef}
                   weeksLived={calculatedData.weeksLived}
                   totalWeeks={calculatedData.totalWeeks}
                   milestoneWeeks={calculatedData.milestoneWeeks}
                   annotations={annotations}
                   goalBlocks={goalBlocks}
+                  weekEmojis={weekEmojis}
+                  customTags={customTags}
+                  annotationTags={annotationTags}
+                  currentView={currentView}
                   onWeekClick={handleWeekClick}
                   onGoalSelect={handleGoalSelect}
+                />
+
+                <PrintView
+                  gridRef={gridRef}
+                  userProfile={userProfile}
+                  calculatedData={calculatedData}
                 />
               </>
             )}
@@ -323,7 +513,14 @@ function App() {
         isOpen={isAnnotationModalOpen}
         weekNumber={selectedWeek}
         existingAnnotation={getSelectedAnnotation()}
+        existingJournal={getSelectedJournal()}
+        existingEmoji={getSelectedEmoji()}
+        existingTags={getSelectedTags()}
+        customTags={customTags}
         onSave={handleAnnotationSave}
+        onSaveJournal={handleJournalSave}
+        onSaveEmoji={handleEmojiSave}
+        onSaveTags={handleTagsSave}
         onCancel={() => {
           setIsAnnotationModalOpen(false);
           setSelectedWeek(null);
@@ -342,6 +539,11 @@ function App() {
           setSelectedGoalRange(null);
         }}
       />
+
+      {/* Reminder Notification */}
+      {calculatedData && (
+        <ReminderNotification weeksLived={calculatedData.weeksLived} />
+      )}
 
       <footer className="app-footer">
         <p>

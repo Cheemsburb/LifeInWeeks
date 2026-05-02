@@ -1,0 +1,43 @@
+.view-toggle {
+  display: flex;
+  background: var(--bg-light);
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.view-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-medium);
+  transition: all 0.2s ease;
+}
+
+.view-btn:hover {
+  background: var(--bg-white);
+  color: var(--text-dark);
+}
+
+.view-btn.active {
+  background: var(--bg-white);
+  color: var(--primary-blue);
+  box-shadow: var(--shadow-subtle);
+}
+
+@media (max-width: 480px) {
+  .view-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .view-btn {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+}

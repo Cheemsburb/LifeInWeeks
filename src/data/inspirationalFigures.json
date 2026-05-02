@@ -1,0 +1,287 @@
+{
+  "figures": [
+    {
+      "id": "mandela",
+      "name": "Nelson Mandela",
+      "birthYear": 1918,
+      "deathYear": 2013,
+      "lifeExpectancy": 95,
+      "description": "Anti-apartheid revolutionary and President of South Africa",
+      "milestones": [
+        {
+          "week": 0,
+          "label": "Born in Mvezo, South Africa",
+          "category": "life"
+        },
+        {
+          "week": 1092,
+          "label": "Started University (Age 21)",
+          "category": "education"
+        },
+        { "week": 1300, "label": "Joined ANC (Age 25)", "category": "career" },
+        {
+          "week": 1560,
+          "label": "Founded ANC Youth League (Age 30)",
+          "category": "career"
+        },
+        {
+          "week": 2184,
+          "label": "Arrested & Imprisoned (Age 42)",
+          "category": "career"
+        },
+        {
+          "week": 2236,
+          "label": "Life Sentence (Age 43)",
+          "category": "career"
+        },
+        {
+          "week": 3588,
+          "label": "Released from Prison (Age 69)",
+          "category": "career"
+        },
+        {
+          "week": 3692,
+          "label": "Elected President (Age 71)",
+          "category": "career"
+        },
+        {
+          "week": 3796,
+          "label": "Nobel Peace Prize (Age 73)",
+          "category": "achievement"
+        },
+        { "week": 4940, "label": "Passed Away (Age 95)", "category": "life" }
+      ]
+    },
+    {
+      "id": "curie",
+      "name": "Marie Curie",
+      "birthYear": 1867,
+      "deathYear": 1934,
+      "lifeExpectancy": 67,
+      "description": "Pioneer in radioactivity research, first woman to win Nobel Prize",
+      "milestones": [
+        { "week": 0, "label": "Born in Warsaw, Poland", "category": "life" },
+        {
+          "week": 832,
+          "label": "Started University (Age 16)",
+          "category": "education"
+        },
+        {
+          "week": 1196,
+          "label": "Moved to Paris (Age 23)",
+          "category": "life"
+        },
+        {
+          "week": 1352,
+          "label": "Met Pierre Curie (Age 26)",
+          "category": "life"
+        },
+        {
+          "week": 1404,
+          "label": "Married Pierre Curie (Age 27)",
+          "category": "family"
+        },
+        {
+          "week": 1508,
+          "label": "Discovered Polonium (Age 29)",
+          "category": "achievement"
+        },
+        {
+          "week": 1560,
+          "label": "Discovered Radium (Age 30)",
+          "category": "achievement"
+        },
+        {
+          "week": 1716,
+          "label": "Nobel Prize in Physics (Age 33)",
+          "category": "achievement"
+        },
+        {
+          "week": 2288,
+          "label": "Nobel Prize in Chemistry (Age 44)",
+          "category": "achievement"
+        },
+        { "week": 3484, "label": "Passed Away (Age 67)", "category": "life" }
+      ]
+    },
+    {
+      "id": "gandhi",
+      "name": "Mahatma Gandhi",
+      "birthYear": 1869,
+      "deathYear": 1948,
+      "lifeExpectancy": 79,
+      "description": "Leader of Indian independence movement through nonviolent resistance",
+      "milestones": [
+        { "week": 0, "label": "Born in Gujarat, India", "category": "life" },
+        {
+          "week": 884,
+          "label": "Started Law Studies (Age 17)",
+          "category": "education"
+        },
+        {
+          "week": 1040,
+          "label": "Became a Lawyer (Age 20)",
+          "category": "career"
+        },
+        {
+          "week": 1144,
+          "label": "Moved to South Africa (Age 22)",
+          "category": "life"
+        },
+        {
+          "week": 1612,
+          "label": "Started Satyagraha Movement (Age 31)",
+          "category": "career"
+        },
+        {
+          "week": 1820,
+          "label": "Returned to India (Age 35)",
+          "category": "life"
+        },
+        {
+          "week": 2236,
+          "label": "Salt March (Age 43)",
+          "category": "achievement"
+        },
+        {
+          "week": 3120,
+          "label": "Quit India Movement (Age 60)",
+          "category": "achievement"
+        },
+        {
+          "week": 3536,
+          "label": "India Independence (Age 68)",
+          "category": "achievement"
+        },
+        { "week": 4108, "label": "Assassinated (Age 79)", "category": "life" }
+      ]
+    },
+    {
+      "id": "einstein",
+      "name": "Albert Einstein",
+      "birthYear": 1879,
+      "deathYear": 1955,
+      "lifeExpectancy": 76,
+      "description": "Theoretical physicist who developed the theory of relativity",
+      "milestones": [
+        { "week": 0, "label": "Born in Germany", "category": "life" },
+        {
+          "week": 780,
+          "label": "Started Polytechnic (Age 15)",
+          "category": "education"
+        },
+        {
+          "week": 1092,
+          "label": "Graduated (Age 21)",
+          "category": "education"
+        },
+        {
+          "week": 1196,
+          "label": "Patent Office Job (Age 23)",
+          "category": "career"
+        },
+        {
+          "week": 1352,
+          "label": "Annus Mirabilis Papers (Age 26)",
+          "category": "achievement"
+        },
+        {
+          "week": 1404,
+          "label": "Theory of Relativity (Age 27)",
+          "category": "achievement"
+        },
+        {
+          "week": 2080,
+          "label": "Nobel Prize in Physics (Age 40)",
+          "category": "achievement"
+        },
+        { "week": 2600, "label": "Moved to USA (Age 50)", "category": "life" },
+        { "week": 3952, "label": "Passed Away (Age 76)", "category": "life" }
+      ]
+    },
+    {
+      "id": "king",
+      "name": "Martin Luther King Jr.",
+      "birthYear": 1929,
+      "deathYear": 1968,
+      "lifeExpectancy": 39,
+      "description": "Civil rights leader who fought for equality through nonviolence",
+      "milestones": [
+        { "week": 0, "label": "Born in Atlanta, Georgia", "category": "life" },
+        {
+          "week": 780,
+          "label": "Started College (Age 15)",
+          "category": "education"
+        },
+        {
+          "week": 988,
+          "label": "Became a Minister (Age 19)",
+          "category": "career"
+        },
+        {
+          "week": 1092,
+          "label": "Earned PhD (Age 21)",
+          "category": "education"
+        },
+        {
+          "week": 1300,
+          "label": "Montgomery Bus Boycott (Age 25)",
+          "category": "achievement"
+        },
+        {
+          "week": 1508,
+          "label": "I Have a Dream Speech (Age 29)",
+          "category": "achievement"
+        },
+        {
+          "week": 1560,
+          "label": "Nobel Peace Prize (Age 30)",
+          "category": "achievement"
+        },
+        {
+          "week": 1768,
+          "label": "March on Washington (Age 34)",
+          "category": "achievement"
+        },
+        { "week": 2028, "label": "Assassinated (Age 39)", "category": "life" }
+      ]
+    },
+    {
+      "id": "teresa",
+      "name": "Mother Teresa",
+      "birthYear": 1910,
+      "deathYear": 1997,
+      "lifeExpectancy": 87,
+      "description": "Catholic nun who dedicated her life to serving the poor",
+      "milestones": [
+        { "week": 0, "label": "Born in Skopje, Macedonia", "category": "life" },
+        {
+          "week": 884,
+          "label": "Joined Sisters of Loreto (Age 17)",
+          "category": "career"
+        },
+        {
+          "week": 1040,
+          "label": "Moved to India (Age 20)",
+          "category": "life"
+        },
+        {
+          "week": 1508,
+          "label": "Founded Missionaries of Charity (Age 29)",
+          "category": "achievement"
+        },
+        {
+          "week": 1872,
+          "label": "Opened Home for Dying (Age 36)",
+          "category": "achievement"
+        },
+        {
+          "week": 2964,
+          "label": "Nobel Peace Prize (Age 57)",
+          "category": "achievement"
+        },
+        { "week": 4524, "label": "Passed Away (Age 87)", "category": "life" }
+      ]
+    }
+  ]
+}

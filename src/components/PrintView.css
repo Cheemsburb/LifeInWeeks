@@ -1,0 +1,137 @@
+.print-view-toggle {
+  margin-bottom: 1rem;
+}
+
+.print-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-medium);
+  transition: all 0.2s ease;
+}
+
+.print-btn:hover {
+  background: var(--bg-light);
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.print-view-container {
+  background: var(--bg-white);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: var(--shadow-subtle);
+  margin-bottom: 2rem;
+}
+
+.print-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.print-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.75rem;
+  color: var(--text-dark);
+}
+
+.print-subtitle {
+  margin: 0 0 0.25rem 0;
+  color: var(--text-medium);
+  font-size: 0.95rem;
+}
+
+.print-stats {
+  margin: 0 0 0.25rem 0;
+  color: var(--text-medium);
+  font-size: 0.9rem;
+}
+
+.print-date {
+  margin: 0.5rem 0 0 0;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.print-grid {
+  min-height: 400px;
+  background: var(--bg-light);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.print-footer {
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.print-footer p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 0.8rem;
+}
+
+.print-actions {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.print-btn-primary {
+  padding: 0.75rem 2rem;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.print-btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Print-specific styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-view-container,
+  .print-view-container * {
+    visibility: visible;
+  }
+
+  .print-view-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .print-actions,
+  .print-view-toggle {
+    display: none !important;
+  }
+
+  .print-header h1 {
+    font-size: 1.5rem;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 1cm;
+  }
+}
