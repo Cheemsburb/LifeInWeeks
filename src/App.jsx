@@ -1,4 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
 import InputForm from "./components/InputForm";
 import HeroSection from "./components/HeroSection";
@@ -12,13 +19,13 @@ import DataExport from "./components/DataExport";
 import DarkModeToggle from "./components/DarkModeToggle";
 import PINLock from "./components/PINLock";
 import ImageExport from "./components/ImageExport";
-import AnalyticsChart from "./components/AnalyticsChart";
 import ViewToggle from "./components/ViewToggle";
 import ReminderNotification from "./components/ReminderNotification";
 import StreakCounter from "./components/StreakCounter";
 import PrintView from "./components/PrintView";
-import PersonaComparison from "./components/PersonaComparison";
-import InspirationalFigures from "./components/InspirationalFigures";
+import AnalyticsPage from "./pages/AnalyticsPage";
+import ComparePage from "./pages/ComparePage";
+import InspirePage from "./pages/InspirePage";
 import {
   calculateWeeksLived,
   calculateTotalWeeks,
@@ -50,7 +57,48 @@ import {
   loadPin,
 } from "./utils/storage";
 
-function App() {
+// Navigation component for header links
+function NavLinks({ userProfile, showExport, setShowExport }) {
+  const location = useLocation();
+  const isMainPage = location.pathname === "/";
+
+  return (
+    <div className="header-links">
+      {userProfile && (
+        <>
+          <Link
+            to="/compare"
+            className={`header-link ${location.pathname === "/compare" ? "active" : ""}`}
+          >
+            Compare
+          </Link>
+          <Link
+            to="/inspire"
+            className={`header-link ${location.pathname === "/inspire" ? "active" : ""}`}
+          >
+            Inspire
+          </Link>
+          <Link
+            to="/analytics"
+            className={`header-link ${location.pathname === "/analytics" ? "active" : ""}`}
+          >
+            Analytics
+          </Link>
+          {isMainPage && (
+            <button
+              className={`header-link ${showExport ? "active" : ""}`}
+              onClick={() => setShowExport(!showExport)}
+            >
+              Export
+            </button>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+function AppContent() {
   const [userProfile, setUserProfile] = useState(null);
   const [calculatedData, setCalculatedData] = useState(null);
   const [annotations, setAnnotations] = useState([]);
@@ -66,13 +114,11 @@ function App() {
   const [selectedGoalRange, setSelectedGoalRange] = useState(null);
   const [showLifestyle, setShowLifestyle] = useState(false);
   const [showExport, setShowExport] = useState(false);
-  const [showPersonaComparison, setShowPersonaComparison] = useState(false);
-  const [showInspirational, setShowInspirational] = useState(false);
-  const [showAnalytics, setShowAnalytics] = useState(false);
   const [currentView, setCurrentView] = useState("life");
   const [isPinSet, setIsPinSet] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const gridRef = useRef(null);
+  const location = useLocation();
 
   // Load saved data on component mount
   useEffect(() => {
@@ -332,6 +378,9 @@ function App() {
     setCurrentView(view);
   };
 
+  // Check if we're on the main page
+  const isMainPage = location.pathname === "/";
+
   // Show PIN lock if set and not unlocked
   if (isPinSet && !isUnlocked) {
     return (
@@ -344,169 +393,206 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Life in Weeks</h1>
+        <Link to="/" className="app-title-link">
+          <h1>Life in Weeks</h1>
+        </Link>
         <div className="header-controls">
           <DarkModeToggle />
           {userProfile && (
-            <div className="header-links">
-              <button
-                className="header-link"
-                onClick={() => setShowLifestyle(!showLifestyle)}
-              >
-                Lifestyle
-              </button>
-              <button
-                className="header-link"
-                onClick={() => setShowPersonaComparison(!showPersonaComparison)}
-              >
-                Compare
-              </button>
-              <button
-                className="header-link"
-                onClick={() => setShowInspirational(!showInspirational)}
-              >
-                Inspire
-              </button>
-              <button
-                className="header-link"
-                onClick={() => setShowAnalytics(!showAnalytics)}
-              >
-                Analytics
-              </button>
-              <button
-                className="header-link"
-                onClick={() => setShowExport(!showExport)}
-              >
-                Export
-              </button>
+            <>
+              <NavLinks
+                userProfile={userProfile}
+                showExport={showExport}
+                setShowExport={setShowExport}
+              />
               <PINLock onUnlock={handlePinUnlock} />
               <button className="header-link reset-btn" onClick={handleReset}>
                 Reset
               </button>
-            </div>
+            </>
           )}
         </div>
       </header>
 
       <main className="app-main">
-        {!userProfile ? (
-          <InputForm
-            onSubmit={handleFormSubmit}
-            initialBirthdate=""
-            initialCountry=""
-          />
-        ) : (
-          <>
-            {calculatedData && (
-              <HeroSection
-                weeksRemaining={calculatedData.weeksRemaining}
-                age={calculatedData.age}
-                yearsRemaining={calculatedData.yearsRemaining}
-                userProfile={userProfile}
-              />
-            )}
-
-            {/* Streak Counter */}
-            {calculatedData && (
-              <StreakCounter
-                currentWeek={calculatedData.weeksLived}
-                annotations={annotations}
-                goalBlocks={goalBlocks}
-              />
-            )}
-
-            {/* View Toggle */}
-            <ViewToggle onViewChange={handleViewChange} />
-
-            {showLifestyle && (
-              <LifestyleFactors
-                currentFactors={lifestyleFactors}
-                currentLifeExpectancy={userProfile.lifeExpectancy}
-                currentAge={calculatedData?.age || 0}
-                onSave={handleLifestyleSave}
-                onClose={() => setShowLifestyle(false)}
-              />
-            )}
-
-            {showExport && (
-              <div className="export-section">
-                <DataExport />
-                <ImageExport gridRef={gridRef} />
-              </div>
-            )}
-
-            {showPersonaComparison && calculatedData && (
-              <PersonaComparison
-                userWeeksLived={calculatedData.weeksLived}
-                userLifeExpectancy={userProfile.lifeExpectancy}
-              />
-            )}
-
-            {showInspirational && <InspirationalFigures />}
-
-            {showAnalytics && (
-              <AnalyticsChart
-                annotations={annotations}
-                goalBlocks={goalBlocks}
-                customTags={customTags}
-                annotationTags={annotationTags}
-              />
-            )}
-
-            {calculatedData && (
-              <>
-                <div className="profile-info">
-                  <span className="profile-detail">
-                    <strong>{userProfile.country}</strong>
-                  </span>
-                  <span className="profile-detail">
-                    Life expectancy:{" "}
-                    <strong>{userProfile.lifeExpectancy} years</strong>
-                  </span>
-                  {lifestyleFactors && (
-                    <span className="profile-detail lifestyle-badge">
-                      Personalized
-                    </span>
-                  )}
-                </div>
-
-                <StatsPanel
-                  weeksLived={calculatedData.weeksLived}
-                  totalWeeks={calculatedData.totalWeeks}
-                  age={calculatedData.age}
-                  yearsRemaining={calculatedData.yearsRemaining}
-                  percentageLived={calculatedData.percentageLived}
-                />
-
-                <TimeBreakdown
-                  timeBreakdown={calculatedData.timeBreakdown}
-                  activityBreakdown={calculatedData.activityBreakdown}
-                />
-
-                <WeeksGrid
-                  ref={gridRef}
-                  weeksLived={calculatedData.weeksLived}
-                  totalWeeks={calculatedData.totalWeeks}
-                  milestoneWeeks={calculatedData.milestoneWeeks}
+        <Routes>
+          <Route
+            path="/analytics"
+            element={
+              userProfile && calculatedData ? (
+                <AnalyticsPage
                   annotations={annotations}
                   goalBlocks={goalBlocks}
-                  weekEmojis={weekEmojis}
                   customTags={customTags}
                   annotationTags={annotationTags}
-                  currentView={currentView}
-                  onWeekClick={handleWeekClick}
-                  onGoalSelect={handleGoalSelect}
                 />
+              ) : (
+                <InputForm
+                  onSubmit={handleFormSubmit}
+                  initialBirthdate=""
+                  initialCountry=""
+                />
+              )
+            }
+          />
+          <Route
+            path="/compare"
+            element={
+              userProfile && calculatedData ? (
+                <ComparePage
+                  userWeeksLived={calculatedData.weeksLived}
+                  userLifeExpectancy={userProfile.lifeExpectancy}
+                />
+              ) : (
+                <InputForm
+                  onSubmit={handleFormSubmit}
+                  initialBirthdate=""
+                  initialCountry=""
+                />
+              )
+            }
+          />
+          <Route
+            path="/inspire"
+            element={
+              userProfile ? (
+                <InspirePage />
+              ) : (
+                <InputForm
+                  onSubmit={handleFormSubmit}
+                  initialBirthdate=""
+                  initialCountry=""
+                />
+              )
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <>
+                {!userProfile ? (
+                  <InputForm
+                    onSubmit={handleFormSubmit}
+                    initialBirthdate=""
+                    initialCountry=""
+                  />
+                ) : (
+                  <>
+                    {calculatedData && (
+                      <HeroSection
+                        weeksRemaining={calculatedData.weeksRemaining}
+                        age={calculatedData.age}
+                        yearsRemaining={calculatedData.yearsRemaining}
+                        userProfile={userProfile}
+                      />
+                    )}
 
-                <PrintView
-                  gridRef={gridRef}
-                  userProfile={userProfile}
-                  calculatedData={calculatedData}
-                />
+                    {/* Streak Counter */}
+                    {calculatedData && (
+                      <StreakCounter
+                        currentWeek={calculatedData.weeksLived}
+                        annotations={annotations}
+                        goalBlocks={goalBlocks}
+                      />
+                    )}
+
+                    {/* View Toggle */}
+                    <ViewToggle onViewChange={handleViewChange} />
+
+                    {showLifestyle && (
+                      <LifestyleFactors
+                        currentFactors={lifestyleFactors}
+                        currentLifeExpectancy={userProfile.lifeExpectancy}
+                        currentAge={calculatedData?.age || 0}
+                        onSave={handleLifestyleSave}
+                        onClose={() => setShowLifestyle(false)}
+                      />
+                    )}
+
+                    {showExport && (
+                      <div className="export-section">
+                        <DataExport />
+                        <ImageExport gridRef={gridRef} />
+                      </div>
+                    )}
+
+                    {calculatedData && (
+                      <>
+                        <div className="profile-info">
+                          <span className="profile-detail">
+                            <strong>{userProfile.country}</strong>
+                          </span>
+                          <span className="profile-detail">
+                            Life expectancy:{" "}
+                            <strong>{userProfile.lifeExpectancy} years</strong>
+                          </span>
+                          {lifestyleFactors && (
+                            <span className="profile-detail lifestyle-badge">
+                              Personalized
+                            </span>
+                          )}
+                        </div>
+
+                        <StatsPanel
+                          weeksLived={calculatedData.weeksLived}
+                          totalWeeks={calculatedData.totalWeeks}
+                          age={calculatedData.age}
+                          yearsRemaining={calculatedData.yearsRemaining}
+                          percentageLived={calculatedData.percentageLived}
+                        />
+
+                        <TimeBreakdown
+                          timeBreakdown={calculatedData.timeBreakdown}
+                          activityBreakdown={calculatedData.activityBreakdown}
+                        />
+
+                        <WeeksGrid
+                          ref={gridRef}
+                          weeksLived={calculatedData.weeksLived}
+                          totalWeeks={calculatedData.totalWeeks}
+                          milestoneWeeks={calculatedData.milestoneWeeks}
+                          annotations={annotations}
+                          goalBlocks={goalBlocks}
+                          weekEmojis={weekEmojis}
+                          customTags={customTags}
+                          annotationTags={annotationTags}
+                          currentView={currentView}
+                          onWeekClick={handleWeekClick}
+                          onGoalSelect={handleGoalSelect}
+                          onUpdateGoalBlock={(updatedGoal) => {
+                            setGoalBlocks((prev) =>
+                              prev.map((g) =>
+                                g.startWeek === updatedGoal.startWeek &&
+                                g.endWeek === updatedGoal.endWeek
+                                  ? updatedGoal
+                                  : g,
+                              ),
+                            );
+                          }}
+                          onUpdateAnnotation={(updatedAnnotation) => {
+                            setAnnotations((prev) =>
+                              prev.map((a) =>
+                                a.weekNumber === updatedAnnotation.weekNumber
+                                  ? updatedAnnotation
+                                  : a,
+                              ),
+                            );
+                          }}
+                        />
+
+                        <PrintView
+                          gridRef={gridRef}
+                          userProfile={userProfile}
+                          calculatedData={calculatedData}
+                        />
+                      </>
+                    )}
+                  </>
+                )}
               </>
-            )}
-          </>
-        )}
+            }
+          />
+        </Routes>
       </main>
 
       <AnnotationModal
@@ -552,6 +638,14 @@ function App() {
         </p>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 

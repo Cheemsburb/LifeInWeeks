@@ -65,6 +65,7 @@
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
+  overflow: auto;
 }
 
 .print-footer {
@@ -101,7 +102,7 @@
   transform: translateY(-1px);
 }
 
-/* Print-specific styles */
+/* Print-specific styles - Only print the print view container */
 @media print {
   body * {
     visibility: hidden;
@@ -119,6 +120,7 @@
     width: 100%;
     box-shadow: none;
     padding: 0;
+    background: white;
   }
 
   .print-actions,
@@ -128,6 +130,11 @@
 
   .print-header h1 {
     font-size: 1.5rem;
+  }
+
+  .print-grid {
+    background: white;
+    padding: 0;
   }
 
   @page {

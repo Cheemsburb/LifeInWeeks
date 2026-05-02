@@ -1,12 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./PrintView.css";
 
 function PrintView({ gridRef, userProfile, calculatedData }) {
   const [showPrintView, setShowPrintView] = useState(false);
+  const printContentRef = useRef(null);
 
   const handlePrint = () => {
     window.print();
   };
+
+  // Clone the grid content for print preview
+  useEffect(() => {
+    if (showPrintView && gridRef.current && printContentRef.current) {
+      const originalGrid = gridRef.current;
+      const printGrid = printContentRef.current;
+
+      // Clone the grid
+      const clonedGrid = originalGrid.cloneNode(true);
+
+      // Copy computed styles
+      const originalStyles = window.getComputedStyle(originalGrid);
+      clonedGrid.style.cssText = Array.from(originalStyles).reduce(
+        (str, key) => `${str}${key}:${originalStyles.getPropertyValue(key)};`,
+        "",
+      );
+
+      // Clear and append
+      printGrid.innerHTML = "";
+      printGrid.appendChild(clonedGrid);
+    }
+  }, [showPrintView, gridRef]);
 
   return (
     <>
@@ -41,7 +64,7 @@ function PrintView({ gridRef, userProfile, calculatedData }) {
             </p>
           </div>
 
-          <div className="print-grid" ref={gridRef}>
+          <div className="print-grid" ref={printContentRef}>
             {/* The grid will be cloned here for printing */}
           </div>
 
